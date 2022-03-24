@@ -20,6 +20,7 @@ globalCtx = ""
 print(10/5)
 
 token = os.environ['token']
+print(token)
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
