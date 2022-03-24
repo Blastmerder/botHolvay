@@ -18,7 +18,7 @@ globalCtx = ""
 
 print(10/5)
 
-token = "OTQ5MjMyNzQ1NzUyNjk4OTEw.YiHX4g.cZS_ZB0cC1CX5FwgUKZs35lHV4w"
+token = "OTM3NzA4NTgxNzUzNjAyMDQ4.YffrKw.ikVLFAvYhwaGJj73Jj4a5po_tTc"
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
