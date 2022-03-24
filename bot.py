@@ -1,3 +1,4 @@
+import os
 import random
 import discord
 from discord.ext import commands
@@ -18,7 +19,7 @@ globalCtx = ""
 
 print(10/5)
 
-token = "OTM3NzA4NTgxNzUzNjAyMDQ4.YffrKw.YUt3nLz7hMqqcgboZm50PM66-8Y"
+token = os.environ['token']
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
