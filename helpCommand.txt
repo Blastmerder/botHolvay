@@ -1,0 +1,8 @@
+комманды:
+    1 - !sphere < text >
+    2 - !BotHelp
+    3 - привет
+    4 - hi
+    5 - hello
+    6 - !quests < level >
+    7 - !MyChatCreate < name > < people >
