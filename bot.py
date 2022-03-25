@@ -1,5 +1,7 @@
 import os
 import random
+from threading import Thread
+
 import discord
 from discord.ext import commands
 from discord.utils import get
@@ -300,6 +302,14 @@ async def sphere(ctx, text=None):
         await ctx.send(embed=emb)
         vc.close()
 
+
+def schedule_checker():
+    while True:
+        time.sleep(30)
+        print("time proccesing")
+
+
+Thread(target=schedule_checker).start()
 
 DiscordComponents(bot=bot)
 bot.run(token)
