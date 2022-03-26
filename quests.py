@@ -24,15 +24,15 @@ def questses(level: int = 1):
         text = f"{arg1} - {arg2} = ?"
     elif level == 5:
         TrueVarable = (0 - arg2) + arg1
-        text = f"{0 - arg2} - {arg1} = ?"
+        text = f"{0 - arg2} + {arg1} = ?"
     elif level == 6:
         TrueVarable = (0 - arg1) + arg2
-        text = f"{0 - arg1} - {arg2} = ?"
+        text = f"{0 - arg1} + {arg2} = ?"
 
     howToTrue = randint(1, 3)
 
-    Button = f'{arg2 - arg1}' if howToTrue == 1 else f"{randint((TrueVarable - randint(1, 100)), (TrueVarable + randint(1, 100)))}"
-    Button2 = f'{arg2 - arg1}' if howToTrue == 2 else f"{randint((TrueVarable - randint(1, 100)), (TrueVarable + randint(1, 100)))}"
-    Button3 = f'{arg2 - arg1}' if howToTrue == 3 else f"{randint((TrueVarable - randint(1, 100)), (TrueVarable + randint(1, 100)))}"
+    Button = f'{TrueVarable}' if howToTrue == 1 else f"{randint((TrueVarable - randint(1, 100)), (TrueVarable + randint(1, 100)))}"
+    Button2 = f'{TrueVarable}' if howToTrue == 2 else f"{randint((TrueVarable - randint(1, 100)), (TrueVarable + randint(1, 100)))}"
+    Button3 = f'{TrueVarable}' if howToTrue == 3 else f"{randint((TrueVarable - randint(1, 100)), (TrueVarable + randint(1, 100)))}"
 
     return {"text": text, "B1": Button, "B2": Button2, "B3": Button3, "IsTrue": howToTrue}

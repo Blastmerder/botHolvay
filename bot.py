@@ -52,7 +52,10 @@ async def clear(ctx, amount: int = None):
 
 
 @bot.command()
-async def quests(ctx, level: int = 1):
+async def quests(ctx, level):
+
+    if isinstance(level, int):
+        await ctx.send(f'Неправельный формат Уровня.\nУказаный вами уровень равен {level}')
 
     quest = questses(level)
 
