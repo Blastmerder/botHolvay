@@ -1,3 +1,1 @@
-botrun.bat
-web: botrun.bat
-worker: botrun.bat
+bot: bot.py
