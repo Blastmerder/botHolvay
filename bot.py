@@ -19,26 +19,18 @@ meassage_list = []
 
 globalCtx = ""
 
-print(10/5)
-
 token = os.environ['token']
-print(token)
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
 commandAdd = ""
-
-members = []
-
-humanPlayNowCitCat = []
-
 
 bot.remove_command("help")
 
 
 @bot.event
 async def on_ready():
-    print(f'Вы вошли как {bot.user}, ваш id: 949232745752698910')
+    print(f'Вы вошли как {bot.user}, ваш id: 937708581753602048')
 
 
 @bot.command(name="clear", pass_context=True)
@@ -131,17 +123,16 @@ async def on_message(message):
                 waitText = False
     elif textlist[0] == "привет" or textlist[0] == "hi" \
             or textlist[0] == "hello":
-        if message.author.id != 949232745752698910:
+        if message.author.id != 937708581753602048:
             await ctx.send(textlist[0])
     elif textlist[0] == "инфа":
-        print(message)
-        await member.send(f'здавствуйте!\n'
-                          f'Вы запросили у меня на сервере {message.guild.name} информацию обомне!\n'
-                          f'Я покачто не имею никакой информации.')
+        FaqBot = open("faq.txt", "r", encoding="UTF-8")
+        fb = FaqBot.read()
+        await ctx.send(fb)
+        FaqBot.close()
     else:
         await bot.process_commands(message)
-        """
-        await bot.event(message)"""
+        await bot.event(message)
 
 
 @bot.event
