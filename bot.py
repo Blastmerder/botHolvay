@@ -1,7 +1,7 @@
 import os
 import random
 from threading import Thread
-
+from asyncio import sleep
 import discord
 from discord.ext import commands
 from discord.utils import get
@@ -133,6 +133,38 @@ async def on_message(message):
     else:
         await bot.process_commands(message)
         await bot.event(message)
+
+
+@bot.command(pass_context=True)
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+
+FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+
+
+@bot.command()
+async def play(ctx, arg):
+    global vc
+
+    try:
+        voice_channel = ctx.message.author.voice.channel
+        vc = await voice_channel.connect()
+    except:
+        print('Уже подключен или не удалось подключиться')
+
+    if vc.is_playing():
+        await ctx.send(f'{ctx.message.author.mention}, музыка уже проигрывается.')
+
+    else:
+
+        vc.play(discord.FFmpegPCMAudio(executable="\\botHolvay\\ffmpeg.exe", source="Take_Five.mp3", **FFMPEG_OPTIONS))
+
+        while vc.is_playing():
+            await sleep(1)
+        if not vc.is_paused():
+            await vc.disconnect()
 
 
 @bot.event
