@@ -313,7 +313,4 @@ def schedule_checker():
 
 
 Thread(target=schedule_checker).start()
-
-DiscordComponents(bot=bot)
-if __name__ == '__bot__':
-    bot.run(token)
+bot.run(token)
