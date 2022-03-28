@@ -276,10 +276,10 @@ async def faq(ctx):
 
 @bot.command()
 async def send_hi(ctx, member: discord.Member):
-    id = random.randint(1, 6)
+    """id = random.randint(1, 6)
     photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
     FaqBot = open(f"{photoid}", "r", encoding="UTF-8")
-    fb = FaqBot.read()
+    fb = FaqBot.read()"""
     await member.send("привет")
 
 
