@@ -19,7 +19,9 @@ meassage_list = []
 
 globalCtx = ""
 
-token = os.environ['token']
+token = "OTM3NzA4NTgxNzUzNjAyMDQ4.YffrKw.bCbkkV-hOfrsrdmkI4S0W7pNqco"
+
+"""token = os.environ['token']"""
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
@@ -227,6 +229,7 @@ async def survayMe(ctx):
 
 @bot.event
 async def on_button_click(inter):
+    print("событие\n", inter)
     guild = bot.get_guild(inter.guild.id)
     message = inter.message
     ctx = discord.utils.get(message.author.guild.text_channels, id=message.channel.id)
