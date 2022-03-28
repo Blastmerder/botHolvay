@@ -44,7 +44,7 @@ async def clear(ctx, amount: int = None):
 
 
 @bot.command()
-async def quests(ctx, level = 1):
+async def quests(ctx, level=1):
 
     if isinstance(level, int):
         await ctx.send(f'Неправельный формат Уровня.\nУказаный вами уровень равен {level}')
@@ -104,6 +104,9 @@ async def MyChatCreate(ctx, name=None, *members: discord.Member):
 
 @bot.event
 async def on_message(message):
+    cost_member = open(f"{message.author.name}.txt", "w", encoding="UTF-8")
+    money = str(open(f"{message.author.name}.txt", "r", encoding="UTF-8")).split("=")
+    cost_member.write(f"money = {int(money[1]) + 2}{money[2:]}")
     text = str(message.content).lower()
     textlist = text.split()
     ltl = len(textlist)
@@ -135,17 +138,11 @@ async def on_message(message):
         await bot.event(message)
 
 
-@bot.command(pass_context=True)
-async def join(ctx):
-    channel = ctx.author.voice.channel
-    await channel.connect()
-
-
 @bot.event
 async def on_member_join(member):
-    members = open("members", "a", encoding="UTF-8")
-    members.write(f"\n{member}")
-    members.close()
+    id = random.randint(1, 6)
+    photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
+    await member.send(f'привет, я приветствую тебя на сервере "Канал Холви"\nМеня создал blastmerder.\nЯ до сих пор программируемый проект\nУдачи тебе освоится {member.name}!', file=discord.File(f"{photoid}"))
 
 
 @bot.event
@@ -275,11 +272,10 @@ async def faq(ctx):
 
 
 @bot.command()
+@commands.has_permissions(administrator=True)
 async def send_hi(ctx, member: discord.Member):
     id = random.randint(1, 6)
     photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
-    """FaqBot = open(f"photo2.gif", "r", encoding="UTF-8")
-    fb = FaqBot.read()"""
     await member.send("привет", file=discord.File(f"{photoid}"))
 
 
