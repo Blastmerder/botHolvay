@@ -141,32 +141,6 @@ async def join(ctx):
     await channel.connect()
 
 
-FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
-
-
-@bot.command()
-async def play(ctx, arg):
-    global vc
-
-    try:
-        voice_channel = ctx.message.author.voice.channel
-        vc = await voice_channel.connect()
-    except:
-        print('Уже подключен или не удалось подключиться')
-
-    if vc.is_playing():
-        await ctx.send(f'{ctx.message.author.mention}, музыка уже проигрывается.')
-
-    else:
-
-        vc.play(discord.FFmpegPCMAudio(executable="\\botHolvay\\ffmpeg.exe", source="Take_Five.mp3", **FFMPEG_OPTIONS))
-
-        while vc.is_playing():
-            await sleep(1)
-        if not vc.is_paused():
-            await vc.disconnect()
-
-
 @bot.event
 async def on_member_join(member):
     members = open("members", "a", encoding="UTF-8")
@@ -336,15 +310,6 @@ async def sphere(ctx, text=None):
 
         await ctx.send(embed=emb)
         vc.close()
-
-
-@bot.command()
-async def send_hi(ctx, member: discord.member):
-    id = random.randint(1, 6)
-    photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
-    FaqBot = open(f"{photoid}", "r", encoding="UTF-8")
-    fb = FaqBot.read()
-    await member.send(fb)
 
 
 def schedule_checker():
