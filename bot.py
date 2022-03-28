@@ -104,9 +104,9 @@ async def MyChatCreate(ctx, name=None, *members: discord.Member):
 
 @bot.event
 async def on_message(message):
-    cost_member = open(f"{message.author.name}.txt", "w", encoding="UTF-8")
+    """cost_member = open(f"{message.author.name}.txt", "w", encoding="UTF-8")
     money = str(open(f"{message.author.name}.txt", "r", encoding="UTF-8")).split("=")
-    cost_member.write(f"money = {int(money[1]) + 2}{money[2:]}")
+    cost_member.write(f"money = {int(money[1]) + 2}{money[2:]}")"""
     text = str(message.content).lower()
     textlist = text.split()
     ltl = len(textlist)
