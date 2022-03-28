@@ -280,7 +280,7 @@ async def send_hi(ctx, member: discord.member):
     photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
     FaqBot = open(f"{photoid}", "r", encoding="UTF-8")
     fb = FaqBot.read()
-    await member.send("привет", file=discord.File(photoid))
+    await member.send("привет")
 
 
 @bot.command()
