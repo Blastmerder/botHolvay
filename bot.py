@@ -338,6 +338,15 @@ async def sphere(ctx, text=None):
         vc.close()
 
 
+@bot.command()
+async def send_hi(ctx, member: discord.member):
+    id = random.randint(1, 6)
+    photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
+    FaqBot = open(f"{photoid}", "r", encoding="UTF-8")
+    fb = FaqBot.read()
+    await member.send(fb)
+
+
 def schedule_checker():
     while True:
         time.sleep(30)
