@@ -123,10 +123,6 @@ async def on_message(message):
                 commandAdd = commandAdd + "\tawait ctx."
             else:
                 waitText = False
-    elif textlist[0] == "привет" or textlist[0] == "hi" \
-            or textlist[0] == "hello":
-        if message.author.id != 937708581753602048:
-            await ctx.send(textlist[0])
     elif textlist[0] == "инфа":
         FaqBot = open("faq.txt", "r", encoding="UTF-8")
         fb = FaqBot.read()
