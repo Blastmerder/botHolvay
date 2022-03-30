@@ -110,14 +110,8 @@ async def on_member_join(member):
 
 @bot.event
 async def on_member_leave(member):
-    members = str(open("members", "r", encoding="UTF-8")).split("\n")
-    newMembers = ""
-    for memb in members:
-        if memb != member:
-            newMembers = f"{newMembers}\n{memb}"
-    members = open("members", "w", encoding="UTF-8")
-    members.write(newMembers)
-    members.close()
+    await member.send(
+        f'Приятно было познокомится с табой, {member.name}.')
 
 
 @bot.command()
@@ -186,6 +180,11 @@ async def survayMe(ctx):
     emb.set_author(name=f'КАК ВАМ МОЯ РАБОТА❔')
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=emb, components=row)
+    response = await bot.wait_for("button_click", check=lambda inter: inter.channel == ctx.channel)
+    if response.custom_id == "cool":
+        await response.respond(content="рады стараться!")
+    else:
+        await response.respond(content="в чем проблема?")
 
 
 @bot.command()
