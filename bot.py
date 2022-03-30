@@ -102,37 +102,6 @@ async def MyChatCreate(ctx, name=None, *members: discord.Member):
 
 
 @bot.event
-async def on_message(message):
-    """cost_member = open(f"{message.author.name}.txt", "w", encoding="UTF-8")
-    money = str(open(f"{message.author.name}.txt", "r", encoding="UTF-8")).split("=")
-    cost_member.write(f"money = {int(money[1]) + 2}{money[2:]}")"""
-    text = str(message.content).lower()
-    textlist = text.split()
-    ltl = len(textlist)
-    ctx = discord.utils.get(message.author.guild.text_channels, id=message.channel.id)
-    member = message.author
-
-    global globalCtx
-    globalCtx = ctx
-
-    global waitText
-    if waitText and message.author.id == 776122179486089227:
-        if textlist[0] == "!chatMessage" and commandWait == "!chatMessage":
-            global commandAdd
-            if ltl != 1:
-                commandAdd = commandAdd + "\tawait ctx."
-            else:
-                waitText = False
-    elif textlist[0] == "инфа":
-        FaqBot = open("faq.txt", "r", encoding="UTF-8")
-        fb = FaqBot.read()
-        await ctx.send(fb)
-        FaqBot.close()
-    else:
-        await bot.process_commands(message)
-
-
-@bot.event
 async def on_member_join(member):
     id = random.randint(1, 6)
     photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
