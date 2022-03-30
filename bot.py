@@ -82,7 +82,6 @@ async def quests(ctx, level=1):
     await ctx.send(embed=emb, components=row)
 
 
-
 @bot.command()
 async def MyChatCreate(ctx, name=None, *members: discord.Member):
     guild = ctx.guild
@@ -135,7 +134,6 @@ async def on_message(message):
         FaqBot.close()
     else:
         await bot.process_commands(message)
-        await bot.event(message)
 
 
 @bot.event
