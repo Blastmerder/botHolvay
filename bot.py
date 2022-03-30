@@ -33,6 +33,44 @@ async def on_ready():
     print(f'Вы вошли как {bot.user}, ваш id: 937708581753602048')
 
 
+@bot.event
+async def on_button_click(inter):
+    print("событие\n", inter)
+    guild = bot.get_guild(inter.guild.id)
+    message = inter.message
+    ctx = discord.utils.get(message.author.guild.text_channels, id=message.channel.id)
+    member = inter.author
+
+    if inter.component.id == "cool":
+        await inter.send(f"Спасибо за поддержку {member.name}!", delete_after=2)
+    elif inter.component.id == "normal":
+        await inter.send(f"Что {member.name} не понравилось?", delete_after=2)
+    elif inter.component.id == "bad":
+        await inter.send(f"Я чем то вам {member.name} не угодил?\n"
+                         "Я буду стараться быть лучше,\n"
+                         "но только скажите что именно вам не понравилось.", delete_after=2)
+    elif inter.component.id == "True1" or inter.component.id == "True2" or inter.component.id == "True3":
+        await inter.send(f"Воу а вы {inter.author.name} математик!", delete_after=2)
+        msg = await message.channel.fetch_message(message.id)
+        await msg.delete()
+    elif inter.component.id == "False1" or inter.component.id == "False2" or inter.component.id == "False3":
+        msg = await message.channel.fetch_message(message.id)
+        await msg.delete()
+        await inter.send(f"Неа! 😂", delete_after=2)
+    elif inter.component.id == "building":
+        building = guild.get_role(949308605100884018)
+        await member.add_roles(building)
+        await inter.send(f"Вы были добавлены в строители.\nУдачного вам дня {member.name}!")
+    elif inter.component.id == "progamicCommandBlock":
+        commandBlock = guild.get_role(949308709522268161)
+        await member.add_roles(commandBlock)
+        await inter.send(f"Вы были добавлены в Кбешеры.\nУдачного вам дня {member.name}!")
+    elif inter.component.id == "paintTexturs":
+        commandBlock = guild.get_role(949308780057874502)
+        await member.add_roles(commandBlock)
+        await inter.send(f"Вы были добавлены в ресурспакеры.\nУдачного вам дня {member.name}!")
+
+
 @bot.command(name="clear", pass_context=True)
 @has_permissions(manage_roles=True, ban_members=True)
 async def clear(ctx, amount: int = None):
@@ -223,44 +261,6 @@ async def survayMe(ctx):
     emb.set_author(name=f'КАК ВАМ МОЯ РАБОТА❔')
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=emb, components=row)
-
-
-@bot.event
-async def on_button_click(inter):
-    print("событие\n", inter)
-    guild = bot.get_guild(inter.guild.id)
-    message = inter.message
-    ctx = discord.utils.get(message.author.guild.text_channels, id=message.channel.id)
-    member = inter.author
-
-    if inter.component.id == "cool":
-        await inter.send(f"Спасибо за поддержку {member.name}!", delete_after=2)
-    elif inter.component.id == "normal":
-        await inter.send(f"Что {member.name} не понравилось?", delete_after=2)
-    elif inter.component.id == "bad":
-        await inter.send(f"Я чем то вам {member.name} не угодил?\n"
-                         "Я буду стараться быть лучше,\n"
-                         "но только скажите что именно вам не понравилось.", delete_after=2)
-    elif inter.component.id == "True1" or inter.component.id == "True2" or inter.component.id == "True3":
-        await inter.send(f"Воу а вы {inter.author.name} математик!", delete_after=2)
-        msg = await message.channel.fetch_message(message.id)
-        await msg.delete()
-    elif inter.component.id == "False1" or inter.component.id == "False2" or inter.component.id == "False3":
-        msg = await message.channel.fetch_message(message.id)
-        await msg.delete()
-        await inter.send(f"Неа! 😂", delete_after=2)
-    elif inter.component.id == "building":
-        building = guild.get_role(949308605100884018)
-        await member.add_roles(building)
-        await inter.send(f"Вы были добавлены в строители.\nУдачного вам дня {member.name}!")
-    elif inter.component.id == "progamicCommandBlock":
-        commandBlock = guild.get_role(949308709522268161)
-        await member.add_roles(commandBlock)
-        await inter.send(f"Вы были добавлены в Кбешеры.\nУдачного вам дня {member.name}!")
-    elif inter.component.id == "paintTexturs":
-        commandBlock = guild.get_role(949308780057874502)
-        await member.add_roles(commandBlock)
-        await inter.send(f"Вы были добавлены в ресурспакеры.\nУдачного вам дня {member.name}!")
 
 
 @bot.command()
