@@ -8,7 +8,6 @@ from discord.utils import get
 from dislash import InteractionClient, ActionRow, Button, ButtonStyle, has_permissions
 import time
 from discord.ext.commands import has_permissions, MissingPermissions
-from discord_components import DiscordComponents, Button
 from discord_components import DiscordComponents, Button, ButtonStyle
 from quests import questses
 
@@ -19,7 +18,8 @@ meassage_list = []
 
 globalCtx = ""
 
-token = os.environ['token']
+"""token = os.environ['token']"""
+token = "OTU4Njg4OTM1ODUxMjI1MTE5.YkQ-pQ.NcuVdqT5D8yPdMMNWb7nmdHYkLM"
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
@@ -180,11 +180,6 @@ async def survayMe(ctx):
     emb.set_author(name=f'КАК ВАМ МОЯ РАБОТА❔')
     await ctx.channel.purge(limit=1)
     await ctx.send(embed=emb, components=row)
-    response = await bot.wait_for("button_click", check=lambda inter: inter.channel == ctx.channel)
-    if response.custom_id == "cool":
-        await response.respond(content="рады стараться!")
-    else:
-        await response.respond(content="в чем проблема?")
 
 
 @bot.command()
