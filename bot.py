@@ -10,6 +10,7 @@ import time
 from discord.ext.commands import has_permissions, MissingPermissions
 from discord_components import DiscordComponents, Button, ButtonStyle
 from quests import questses
+from discord_buttons_plugin import *
 
 intents = discord.Intents.default()  # Allow the use of custom intents
 intents.members = True
@@ -24,12 +25,35 @@ waitText = False
 commandWait = ""
 commandAdd = ""
 
+buttons = ButtonsClient(bot)
+
 bot.remove_command("help")
 
 
 @bot.event
 async def on_ready():
     print(f'Вы вошли как {bot.user}, ваш id: 937708581753602048')
+
+
+@bot.command()
+async def test_button(ctx):
+    await buttons.send(
+        content="It's test",
+        components=[
+            ActionRow(
+                Button(
+                    label="1",
+                    style=ButtonType().Primary,
+                    custom_id="one"
+                )
+            )
+        ]
+    )
+
+
+@buttons.click
+async def one(ctx):
+    await ctx.reply("Hello")
 
 
 @bot.command(name="clear", pass_context=True)
