@@ -18,8 +18,7 @@ meassage_list = []
 
 globalCtx = ""
 
-"""token = os.environ['token']"""
-token = "OTU4Njg4OTM1ODUxMjI1MTE5.YkQ-pQ.NcuVdqT5D8yPdMMNWb7nmdHYkLM"
+token = os.environ['token']
 bot = commands.Bot(command_prefix="!", intents=intents)
 waitText = False
 commandWait = ""
