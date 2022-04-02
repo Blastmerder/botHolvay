@@ -38,6 +38,7 @@ async def on_ready():
 async def test_button(ctx):
     await buttons.send(
         content="It's test",
+        channel=ctx.channel.id,
         components=[
             ActionRow(
                 Button(
