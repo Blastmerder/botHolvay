@@ -53,6 +53,7 @@ async def test_button(ctx):
 
 @buttons.click
 async def one(ctx):
+    print("WORK")
     await ctx.reply("Hello")
 
 
@@ -68,7 +69,6 @@ async def clear(ctx, amount: int = None):
 
 @bot.command()
 async def quests(ctx, level=1):
-
     if isinstance(level, int):
         await ctx.send(f'Неправельный формат Уровня.\nУказаный вами уровень равен {level}')
 
@@ -128,7 +128,9 @@ async def MyChatCreate(ctx, name=None, *members: discord.Member):
 async def on_member_join(member):
     id = random.randint(1, 6)
     photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
-    await member.send(f'привет, я приветствую тебя на сервере "Канал Холви"\nМеня создал blastmerder.\nЯ до сих пор программируемый проект\nУдачи тебе освоится {member.name}!', file=discord.File(f"{photoid}"))
+    await member.send(
+        f'привет, я приветствую тебя на сервере "Канал Холви"\nМеня создал blastmerder.\nЯ до сих пор программируемый проект\nУдачи тебе освоится {member.name}!',
+        file=discord.File(f"{photoid}"))
 
 
 @bot.event
@@ -219,7 +221,11 @@ async def faq(ctx):
 async def send_hi(ctx, member: discord.Member):
     id = random.randint(1, 6)
     photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
-    await member.send("привет", file=discord.File(f"{photoid}"))
+    try:
+        await member.send("привет", file=discord.File(f"{photoid}"))
+        await ctx.send(f"успешно было прислано приветствие пользователю {member.name}")
+    except:
+        await ctx.send(f"не удалось прислать приветствие пользователю {member.name}")
 
 
 @bot.command()
