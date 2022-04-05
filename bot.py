@@ -229,6 +229,19 @@ async def send_hi(ctx, member: discord.Member):
 
 
 @bot.command()
+@commands.has_permissions(administrator=True)
+async def send(ctx, member: discord.Member, message=None):
+    try:
+        if message is None:
+            await ctx.send(f"не указанно сообщение")
+        else:
+            await member.send(f"{message}")
+            await ctx.send(f"успешно было прислано приветствие пользователю {member.name}")
+    except:
+        await ctx.send(f"не удалось прислать приветствие пользователю {member.name}")
+
+
+@bot.command()
 async def Help(ctx):
     await ctx.channel.purge(limit=1)
     FaqBot = open("helpCommand.txt", "r", encoding="UTF-8")
