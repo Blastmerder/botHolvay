@@ -132,6 +132,17 @@ async def on_member_join(member):
         f'привет, я приветствую тебя на сервере "Канал Холви"\nМеня создал blastmerder.\nЯ до сих пор программируемый проект\nУдачи тебе освоится {member.name}!',
         file=discord.File(f"{photoid}"))
 
+    channel = bot.get_channel(943479133722247258)
+
+    guild = channel.guild
+    overwrites = {
+        guild.default_role: discord.PermissionOverwrite(read_messages=False),
+        guild.me: discord.PermissionOverwrite(read_messages=True),
+        member: discord.PermissionOverwrite(read_messages=True)
+    }
+
+    mod_logs = await guild.create_text_channel(name=f"⟨🤖⟩-лс", overwrites=overwrites)
+
 
 @bot.event
 async def on_member_leave(member):
