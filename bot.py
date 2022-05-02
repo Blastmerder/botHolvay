@@ -230,6 +230,16 @@ async def send_hi(ctx, member: discord.Member):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
+async def send(ctx, member: discord.Member, message):
+    try:
+        await member.send(f"{message}")
+        await ctx.send(f"успешно было прислано сообщение пользователю {member.name}")
+    except:
+        await ctx.send(f"не удалось прислать сообщение пользователю {member}")
+
+
+@bot.command()
+@commands.has_permissions(administrator=True)
 async def send(ctx, member: discord.Member, message=None):
     try:
         if message is None:
