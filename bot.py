@@ -231,7 +231,7 @@ async def send(ctx, member: discord.Member, message):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
-async def mute(ctx, member: discord.Member, time_mute=1, model_time_mute="s"):
+async def mute(ctx, member: discord.Member, time_mute=1, model_time_mute="s", reason="Без причины"):
     if time_mute == 1:
         time_mute_text = Translation_singular[model_time_mute]
     else:
@@ -243,7 +243,8 @@ async def mute(ctx, member: discord.Member, time_mute=1, model_time_mute="s"):
             description=
             f"""
                 Пользователь {member.name} был замутен на {time_mute_text},
-                Пользователем {ctx.message.autor.name} 
+                Пользователем {ctx.message.autor.name}.
+                По причине: {reason}
                 """
         )
         emb.set_author(name=f'{ctx.message.autor.name}')
