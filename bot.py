@@ -1,15 +1,6 @@
-import os
-import random
-from threading import Thread
-import discord
-from discord.ext import commands
-from discord.utils import get
-from dislash import InteractionClient, ActionRow, Button, ButtonStyle, has_permissions
 import time
-from discord.ext.commands import has_permissions, MissingPermissions
-from discord_components import DiscordComponents, Button, ButtonStyle
-from quests import questses
-from discord_buttons_plugin import *
+
+from imports import *
 
 intents = discord.Intents.default()  # Allow the use of custom intents
 intents.members = True
@@ -127,7 +118,7 @@ async def MyChatCreate(ctx, name=None, *members: discord.Member):
 @bot.event
 async def on_member_join(member):
     id = random.randint(1, 6)
-    photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
+    photoid = f"photo/photo{id}.jpg" if id != 2 and id != 3 else f"photo/photo{id}.gif"
     await member.send(
         f'привет, я приветствую тебя на сервере "Канал Холви"\nМеня создал blastmerder.\nЯ до сих пор программируемый проект\nУдачи тебе освоится {member.name}!',
         file=discord.File(f"{photoid}"))
@@ -210,7 +201,7 @@ async def survayMe(ctx):
 @bot.command()
 async def faq(ctx):
     await ctx.channel.purge(limit=1)
-    FaqBot = open("faq.txt", "r", encoding="UTF-8")
+    FaqBot = open("txt files/faq.txt", "r", encoding="UTF-8")
     fb = FaqBot.read()
     await ctx.send(fb)
     FaqBot.close()
@@ -220,7 +211,7 @@ async def faq(ctx):
 @commands.has_permissions(administrator=True)
 async def send_hi(ctx, member: discord.Member):
     id = random.randint(1, 6)
-    photoid = f"photo{id}.jpg" if id != 2 and id != 3 else f"photo{id}.gif"
+    photoid = f"photo/photo{id}.jpg" if id != 2 and id != 3 else f"photo/photo{id}.gif"
     try:
         await member.send("привет", file=discord.File(f"{photoid}"))
         await ctx.send(f"успешно было прислано приветствие пользователю {member.name}")
@@ -240,6 +231,43 @@ async def send(ctx, member: discord.Member, message):
 
 @bot.command()
 @commands.has_permissions(administrator=True)
+async def mute(ctx, member: discord.Member, time_mute=1, model_time_mute="s"):
+    if time_mute == 1:
+        time_mute_text = Translation_singular[model_time_mute]
+    else:
+        time_mute_text = f"{time_mute} {Translation_plural[model_time_mute]}"
+    try:
+        emb = discord.Embed(
+            colour=0xFF8C00,
+
+            description=
+            f"""
+                Пользователь {member.name} был замутен на {time_mute_text},
+                Пользователем {ctx.message.autor.name} 
+                """
+        )
+        emb.set_author(name=f'{ctx.message.autor.name}')
+        guild = bot.get_guild(ctx.guild.id)
+        mute_role = guild.get_role(958658798388662352)
+        await member.add_roles(mute_role)
+        await ctx.send(embed=emb)
+        time.sleep(time_mute * time_multiplier[model_time_mute])
+        await member.remove_roles(mute_role)
+    except:
+        emb = discord.Embed(
+            colour=0xFF8C00,
+
+            description=
+            f"""
+                        Не удолось замутить пользователя {member.name}
+                        """
+        )
+        emb.set_author(name=f'Что-то пошло не так (')
+        await ctx.send(embed=emb)
+
+
+@bot.command()
+@commands.has_permissions(administrator=True)
 async def send(ctx, member: discord.Member, message=None):
     try:
         if message is None:
@@ -254,7 +282,7 @@ async def send(ctx, member: discord.Member, message=None):
 @bot.command()
 async def Help(ctx):
     await ctx.channel.purge(limit=1)
-    FaqBot = open("helpCommand.txt", "r", encoding="UTF-8")
+    FaqBot = open("txt files/helpCommand.txt", "r", encoding="UTF-8")
     fb = FaqBot.read()
     await ctx.send(fb)
 
@@ -264,10 +292,10 @@ async def sphere(ctx, text=None):
     if text is None:
         await ctx.send(f"не достаточно данных")
     else:
-        vc = open("varebleConten", "r", encoding="UTF-8")
+        vc = open("txt files/varebleConten", "r", encoding="UTF-8")
         facts = vc.read().split("\n")
 
-        colour = open("colour.txt", "r", encoding="UTF-8")
+        colour = open("txt files/colour.txt", "r", encoding="UTF-8")
         colours = colour.read().split("\n")
 
         emb = discord.Embed(
